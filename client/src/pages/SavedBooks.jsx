@@ -26,22 +26,30 @@ const SavedBooks = () => {
 
   return (
     <>
+      <div className="text-light bg-dark p-5">
+        <Container fluid={true}> {/* Fixing the fluid prop */}
+          <h1>Viewing saved books!</h1>
+        </Container>
+      </div>
+
       <Container>
-        <h2>
+        <h2 className="pt-5">
           {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved books`
+            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}`
             : 'You have no saved books!'}
         </h2>
         <Row>
           {userData.savedBooks.map((book) => (
-            <Col key={book.bookId} md="4">
-              <Card>
-                {book.image && <Card.Img src={book.image} alt={book.title} />}
+            <Col md="4" key={book.bookId}> {/* Adding a unique key */}
+              <Card border="dark">
+                {book.image && <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant="top" />}
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
-                  <p>{book.authors.join(', ')}</p>
-                  <p>{book.description}</p>
-                  <Button onClick={() => handleDeleteBook(book.bookId)}>Remove this book</Button>
+                  <p className="small">Authors: {book.authors.join(', ')}</p>
+                  <Card.Text>{book.description}</Card.Text>
+                  <Button className="btn-block btn-danger" onClick={() => handleDeleteBook(book.bookId)}>
+                    Delete this Book!
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>

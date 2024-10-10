@@ -14,14 +14,14 @@ const server = new ApolloServer({
   resolvers,
 });
 
-// Start Apollo 
+// Start Apollo Server
 const startApolloServer = async () => {
   await server.start();
 
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  app.use('/graphql', expressMiddleware(server)); // middleware
+  app.use('/graphql', expressMiddleware(server)); // Middleware to serve GraphQL at /graphql
 
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
@@ -39,5 +39,4 @@ const startApolloServer = async () => {
   });
 };
 
-// start the server
 startApolloServer();
