@@ -21,6 +21,7 @@
     "apollo-server-express": "^3.13.0",
     "express": "^4.21.1",
     "graphql": "^16.9.0",
-    "mongoose": "^8.7.1"
+    "mongoose": "^8.7.1",
+    "vite": "^5.4.8"
   }
 }
