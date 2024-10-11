@@ -1,9 +1,12 @@
+import React from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar'; 
 import { Outlet } from 'react-router-dom';
 
-const httpLink = createHttpLink({ uri: '/graphql' });
+const httpLink = createHttpLink({
+  uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql', 
+});
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
@@ -24,7 +27,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Navbar />
-      <Outlet />
+      <Outlet /> 
     </ApolloProvider>
   );
 }
